@@ -14,7 +14,7 @@ android {
 }
 
 dependencies {
-  compile project(':library')
+  compile project(':appstate')
 
   compile "com.android.support:appcompat-v7:$supportLibraryVersion"
 }
