@@ -1,1 +1,3 @@
-include ':appstate', ':sample'
+include ':appstate'
+include ':appstate-adapters:rxjava'
+include ':sample'

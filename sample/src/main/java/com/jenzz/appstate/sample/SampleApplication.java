@@ -7,7 +7,7 @@ import android.widget.Toast;
 import com.jenzz.appstate.AppState;
 import com.jenzz.appstate.AppStateListener;
 import com.jenzz.appstate.AppStateMonitor;
-import com.jenzz.appstate.RxAppStateMonitor;
+import com.jenzz.appstate.adapter.rxjava.RxAppStateMonitor;
 
 import rx.functions.Action1;
 
@@ -17,7 +17,7 @@ import static com.jenzz.appstate.AppState.FOREGROUND;
 
 public class SampleApplication extends Application {
 
-  private static final String TAG = "RxAppStateMonitor";
+  private static final String TAG = "AppStateMonitor";
 
   private AppStateMonitor appStateMonitor;
 
@@ -34,7 +34,7 @@ public class SampleApplication extends Application {
     });
 
     // Callback sample
-    appStateMonitor = RxAppStateMonitor.create(this);
+    appStateMonitor = AppStateMonitor.create(this);
     appStateMonitor.addListener(new SampleAppStateListener());
     appStateMonitor.start();
   }

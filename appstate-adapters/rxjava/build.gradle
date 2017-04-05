@@ -1,0 +1,23 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.androidSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.androidSdkVersion
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
+    }
+}
+
+dependencies {
+    provided project(':appstate')
+
+    compile "com.android.support:support-annotations:$supportLibraryVersion"
+    compile 'io.reactivex:rxjava:1.2.5'
+
+    testCompile rootProject.testCompile
+    testCompile project(path: ':appstate', configuration: 'testArtifact')
+}

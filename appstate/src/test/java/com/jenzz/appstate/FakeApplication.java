@@ -1,4 +1,4 @@
-package com.jenzz.appstate.fakes;
+package com.jenzz.appstate;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -13,21 +13,12 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.functions.Action1;
-
 import static android.content.Intent.ACTION_SCREEN_OFF;
 
 @SuppressLint("Registered")
 public class FakeApplication extends Application {
 
   public static final Intent SCREEN_OFF = new Intent(ACTION_SCREEN_OFF);
-  public static final Action1<Application.ActivityLifecycleCallbacks> ACTIVITY_STARTED =
-          new Action1<Application.ActivityLifecycleCallbacks>() {
-            @Override
-            public void call(Application.ActivityLifecycleCallbacks activityLifecycleCallbacks) {
-              activityLifecycleCallbacks.onActivityStarted(new Activity());
-            }
-          };
 
   @NonNull private final List<ActivityLifecycleCallbacks> activityLifecycleCallbacks = new ArrayList<>();
   @NonNull private final List<ComponentCallbacks2> componentCallbacks = new ArrayList<>();
@@ -69,16 +60,16 @@ public class FakeApplication extends Application {
   }
 
   public void goForeground() {
-    notifyActivityLifecycleCallbacks(ACTIVITY_STARTED);
+    notifyActivityStarted();
   }
 
   public void goBackground() {
     notifyReceivers(SCREEN_OFF);
   }
 
-  public void notifyActivityLifecycleCallbacks(@NonNull Action1<ActivityLifecycleCallbacks> action) {
+  public void notifyActivityStarted() {
     for (ActivityLifecycleCallbacks callback : activityLifecycleCallbacks) {
-      action.call(callback);
+      callback.onActivityStarted(new Activity());
     }
   }
 

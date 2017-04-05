@@ -1,32 +1,16 @@
-package com.jenzz.appstate.stubs;
+package com.jenzz.appstate.internal;
 
 import android.support.annotation.NonNull;
 
 import com.jenzz.appstate.AppState;
 import com.jenzz.appstate.AppStateListener;
-import com.jenzz.appstate.internal.AppStateRecognizer;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import rx.functions.Action1;
-
 import static com.jenzz.appstate.AppState.BACKGROUND;
 
 public class StubAppStateRecognizer implements AppStateRecognizer {
-
-  public static final Action1<AppStateListener> ACTION_FOREGROUND = new Action1<AppStateListener>() {
-    @Override
-    public void call(AppStateListener appStateListener) {
-      appStateListener.onAppDidEnterForeground();
-    }
-  };
-  public static final Action1<AppStateListener> ACTION_BACKGROUND = new Action1<AppStateListener>() {
-    @Override
-    public void call(AppStateListener appStateListener) {
-      appStateListener.onAppDidEnterBackground();
-    }
-  };
 
   @NonNull private final List<AppStateListener> listeners = new ArrayList<>();
 
@@ -72,9 +56,15 @@ public class StubAppStateRecognizer implements AppStateRecognizer {
     return isStarted;
   }
 
-  public void notifyAppStateListener(@NonNull Action1<AppStateListener> action) {
+  public void notifyAppDidEnterForeground() {
     for (AppStateListener listener : listeners) {
-      action.call(listener);
+      listener.onAppDidEnterForeground();
+    }
+  }
+
+  public void notifyAppDidEnterBackground() {
+    for (AppStateListener listener : listeners) {
+      listener.onAppDidEnterBackground();
     }
   }
 }

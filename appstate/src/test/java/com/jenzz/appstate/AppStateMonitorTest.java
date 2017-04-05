@@ -2,21 +2,18 @@ package com.jenzz.appstate;
 
 import android.support.annotation.NonNull;
 
-import com.jenzz.appstate.fakes.FakeApplication;
-import com.jenzz.appstate.stubs.StubAppStateRecognizer;
+import com.jenzz.appstate.internal.StubAppStateRecognizer;
 
 import org.junit.Test;
-
-import rx.observers.TestSubscriber;
 
 import static com.jenzz.appstate.AppState.BACKGROUND;
 import static com.jenzz.appstate.AppState.FOREGROUND;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class RxAppStateMonitorTest {
+public class AppStateMonitorTest {
 
   @NonNull private final StubAppStateRecognizer stubRecognizer = new StubAppStateRecognizer();
-  @NonNull private final AppStateMonitor appStateMonitor = new RxAppStateMonitor(stubRecognizer);
+  @NonNull private final AppStateMonitor appStateMonitor = new AppStateMonitor(stubRecognizer);
 
   @Test
   public void startsAndStopsMonitoring() {
@@ -56,18 +53,5 @@ public class RxAppStateMonitorTest {
 
     assertThat(appStateMonitor.isAppInForeground()).isFalse();
     assertThat(appStateMonitor.isAppInBackground()).isTrue();
-  }
-
-  @Test
-  public void emitsAppStates() {
-    FakeApplication fakeApplication = new FakeApplication();
-    TestSubscriber<AppState> subscriber = TestSubscriber.create();
-    RxAppStateMonitor.monitor(fakeApplication).subscribe(subscriber);
-
-    fakeApplication.goForeground();
-    fakeApplication.goBackground();
-
-    subscriber.assertValues(FOREGROUND, BACKGROUND);
-    subscriber.assertNoTerminalEvent();
   }
 }

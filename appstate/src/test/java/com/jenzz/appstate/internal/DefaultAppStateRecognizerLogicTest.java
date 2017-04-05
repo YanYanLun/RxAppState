@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.jenzz.appstate.AppState;
 import com.jenzz.appstate.AppStateListener;
-import com.jenzz.appstate.fakes.FakeApplication;
+import com.jenzz.appstate.FakeApplication;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,8 +13,7 @@ import org.mockito.Mock;
 import static android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN;
 import static com.jenzz.appstate.AppState.BACKGROUND;
 import static com.jenzz.appstate.AppState.FOREGROUND;
-import static com.jenzz.appstate.fakes.FakeApplication.ACTIVITY_STARTED;
-import static com.jenzz.appstate.fakes.FakeApplication.SCREEN_OFF;
+import static com.jenzz.appstate.FakeApplication.SCREEN_OFF;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -46,7 +45,7 @@ public class DefaultAppStateRecognizerLogicTest {
   public void notifiesForegroundWhenActivityStarted() {
     givenAppState(BACKGROUND);
 
-    fakeApplication.notifyActivityLifecycleCallbacks(ACTIVITY_STARTED);
+    fakeApplication.notifyActivityStarted();
 
     verify(mockListener).onAppDidEnterForeground();
   }
@@ -55,9 +54,9 @@ public class DefaultAppStateRecognizerLogicTest {
   public void doesNotNotifyForegroundAgainWhenMultipleActivitiesStarted() {
     givenAppState(BACKGROUND);
 
-    fakeApplication.notifyActivityLifecycleCallbacks(ACTIVITY_STARTED);
-    fakeApplication.notifyActivityLifecycleCallbacks(ACTIVITY_STARTED);
-    fakeApplication.notifyActivityLifecycleCallbacks(ACTIVITY_STARTED);
+    fakeApplication.notifyActivityStarted();
+    fakeApplication.notifyActivityStarted();
+    fakeApplication.notifyActivityStarted();
 
     verify(mockListener, times(1)).onAppDidEnterForeground();
   }

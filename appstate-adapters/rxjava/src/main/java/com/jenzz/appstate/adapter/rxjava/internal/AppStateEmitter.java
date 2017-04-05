@@ -1,10 +1,11 @@
-package com.jenzz.appstate.internal;
+package com.jenzz.appstate.adapter.rxjava.internal;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
 
 import com.jenzz.appstate.AppState;
 import com.jenzz.appstate.AppStateListener;
+import com.jenzz.appstate.internal.AppStateRecognizer;
 
 import rx.Emitter;
 import rx.functions.Action1;
