@@ -1,3 +1,4 @@
 include ':appstate'
 include ':appstate-adapters:rxjava'
+include ':appstate-adapters:rxjava2'
 include ':sample'

@@ -9,6 +9,8 @@ import com.jenzz.appstate.AppStateListener;
 import com.jenzz.appstate.AppStateMonitor;
 import com.jenzz.appstate.adapter.rxjava.RxAppStateMonitor;
 
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 import rx.functions.Action1;
 
 import static android.widget.Toast.LENGTH_LONG;
@@ -25,10 +27,18 @@ public class SampleApplication extends Application {
   public void onCreate() {
     super.onCreate();
 
-    // RX sample
+    // RxJava sample
     RxAppStateMonitor.monitor(this).subscribe(new Action1<AppState>() {
       @Override
       public void call(AppState appState) {
+        // Hocus, Pocus, Abracadabra!
+      }
+    });
+
+    // RxJava2 sample
+    com.jenzz.appstate.adapter.rxjava2.RxAppStateMonitor.monitor(this).subscribe(new Consumer<AppState>() {
+      @Override
+      public void accept(@NonNull AppState appState) throws Exception {
         // Hocus, Pocus, Abracadabra!
       }
     });

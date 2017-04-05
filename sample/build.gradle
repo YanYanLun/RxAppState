@@ -11,11 +11,16 @@ android {
     versionCode rootProject.versionCode
     versionName rootProject.versionName
   }
+
+  packagingOptions {
+    exclude 'META-INF/rxjava.properties'
+  }
 }
 
 dependencies {
   compile project(':appstate')
   compile project(':appstate-adapters:rxjava')
+  compile project(':appstate-adapters:rxjava2')
 
   compile "com.android.support:appcompat-v7:$supportLibraryVersion"
 }
