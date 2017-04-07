@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
   compileSdkVersion rootProject.androidSdkVersion
@@ -28,5 +29,16 @@ configurations {
 }
 
 artifacts {
-    testArtifact jarTests
+  testArtifact jarTests
+}
+
+publish {
+  artifactId = 'appstate'
+  userOrg = rootProject.userOrg
+  groupId = rootProject.groupId
+  uploadName = rootProject.uploadName
+  publishVersion = rootProject.publishVersion
+  desc = rootProject.desc
+  website = rootProject.website
+  licences = rootProject.licences
 }

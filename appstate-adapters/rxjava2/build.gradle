@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'com.novoda.bintray-release'
 
 android {
     compileSdkVersion rootProject.androidSdkVersion
@@ -20,4 +21,15 @@ dependencies {
 
     testCompile rootProject.testCompile
     testCompile project(path: ':appstate', configuration: 'testArtifact')
+}
+
+publish {
+    artifactId = 'adapter-rxjava2'
+    userOrg = rootProject.userOrg
+    groupId = rootProject.groupId
+    uploadName = rootProject.uploadName
+    publishVersion = rootProject.publishVersion
+    desc = rootProject.desc
+    website = rootProject.website
+    licences = rootProject.licences
 }
