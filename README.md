@@ -25,25 +25,8 @@ The implementation is dead simple.
 Usage
 -----
 You most probably want to monitor for app state changes in your application's `onCreate()` method
-in which case you also don't need to worry about unsubscribing from the `Observable`.
-Remember that if you subscribe in an `Activity` or `Fragment` don't forget to unsubscribe to avoid memory leaks.
-```java
-RxAppStateMonitor.monitor(this).subscribe(new Action1<AppState>() {
-    @Override
-    public void call(AppState appState) {
-        switch (appState) {
-            case FOREGROUND:
-                // Hocus Pocus...
-                break;
-            case BACKGROUND:
-                // Abracadabra!
-                break;
-        }
-    }
-});
-```
-
-If you haven't jumped onto the hip RX bandwagon yet, you can also register oldskool callback listeners:
+in which case you also don't need to worry about unregistering your `AppStateListener`.
+Remember that if you subscribe in an `Activity` or a `Fragment`, don't forget to unsubscribe to avoid memory leaks.
 ```java
 AppStateMonitor appStateMonitor = RxAppStateMonitor.create(this);
 appStateMonitor.addListener(new AppStateListener() {
@@ -66,26 +49,15 @@ Check out the [sample project](https://github.com/jenzz/RxAppState/tree/master/s
 
 Download
 --------
-This library is published via [JitPack](https://jitpack.io/#com.jenzz/RxAppState).
-
-**Step 1.** Add the JitPack repository to your project root `build.gradle`:
-
-```groovy
-allprojects {
-  repositories {
-	...
-	maven { url "https://jitpack.io" }
-  }
-}
-```
-
-**Step 2.** Add the dependency to your app `build.gradle`:
+Grab it via Gradle:
 
 ```groovy
 dependencies {
-  compile 'com.jenzz:RxAppState:2.0.1'
+  compile 'com.jenzz.appstate:appstate:3.0.0'
 }
 ```
+
+*Note:* There are adapters available for [RxJava](https://github.com/jenzz/RxAppState/tree/master/appstate-adapters/rxjava) and [RxJava2](https://github.com/jenzz/RxAppState/tree/master/appstate-adapters/rxjava2).
 
 License
 -------

@@ -1,6 +1,11 @@
 Change Log
 ==========
 
+Version 3.0.0 *(2017/04/11)*
+----------------------------
+* Remove hard dependency on RxJava by abstracting out RxJava adapter (#4)
+* Add support for RxJava2 (#13)
+
 Version 2.0.1 *(2017/01/31)*
 ----------------------------
 * Fix missing call to `AppStateRecognizer.start()` when using RX monitor (#12)

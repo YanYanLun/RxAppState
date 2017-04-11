@@ -22,8 +22,8 @@ ext {
   androidSdkVersion = 25
   buildToolsVersion = '25.0.2'
   minSdkVersion = 14
-  versionCode = 5
-  versionName = '2.0.1'
+  versionCode = 6
+  versionName = '3.0.0'
 
   supportLibraryVersion = '25.3.1'
 
@@ -33,7 +33,7 @@ ext {
 
   userOrg = 'jenzz'
   groupId = 'com.jenzz.appstate'
-  uploadName = 'AppStateMonitor'
+  uploadName = 'RxAppState'
   publishVersion = versionName
   desc = 'A simple Android library that monitors app state changes (background / foreground).'
   website = 'https://github.com/jenzz/RxAppState'
