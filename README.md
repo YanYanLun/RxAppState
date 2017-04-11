@@ -19,7 +19,7 @@ There are two popular discussions on this topic on StackOverflow:
 * [Checking if an Android application is running in the background](http://stackoverflow.com/questions/3667022/checking-if-an-android-application-is-running-in-the-background)
 
 This library internally uses a combination of `ActivityLifecycleCallbacks` and the `onTrimMemory(int level)` callback to identify the current app state.  
-Just check out the source code (mainly: [AppStateRecognizer](https://github.com/jenzz/RxAppState/blob/master/library/src/main/java/com/jenzz/appstate/internal/AppStateRecognizer.java)).
+Just check out the source code (mainly: [DefaultAppStateRecognizer](https://github.com/jenzz/RxAppState/blob/master/appstate/src/main/java/com/jenzz/appstate/internal/DefaultAppStateRecognizer.java)).
 The implementation is dead simple.
 
 Usage
@@ -57,7 +57,7 @@ dependencies {
 }
 ```
 
-*Note:* There are adapters available for [RxJava](https://github.com/jenzz/RxAppState/tree/master/appstate-adapters/rxjava) and [RxJava2](https://github.com/jenzz/RxAppState/tree/master/appstate-adapters/rxjava2).
+**Note:** There are adapters available for [RxJava](https://github.com/jenzz/RxAppState/tree/master/appstate-adapters/rxjava) and [RxJava2](https://github.com/jenzz/RxAppState/tree/master/appstate-adapters/rxjava2).
 
 License
 -------
