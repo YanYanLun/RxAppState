@@ -10,15 +10,25 @@ android {
     targetSdkVersion rootProject.androidSdkVersion
   }
 
+  buildTypes {
+    jcenter {
+      initWith debug
+    }
+  }
+
   packagingOptions {
     exclude 'META-INF/rxjava.properties'
   }
 }
 
 dependencies {
-  compile project(':appstate')
-  compile project(':appstate-adapters:rxjava')
-  compile project(':appstate-adapters:rxjava2')
+  debugCompile project(':appstate')
+  debugCompile project(':appstate-adapters:rxjava')
+  debugCompile project(':appstate-adapters:rxjava2')
+
+  jcenterCompile "com.jenzz.appstate:appstate:$VERSION_NAME"
+  jcenterCompile "com.jenzz.appstate:adapter-rxjava:$VERSION_NAME"
+  jcenterCompile "com.jenzz.appstate:adapter-rxjava2:$VERSION_NAME"
 
   compile "com.android.support:appcompat-v7:$supportLibraryVersion"
 }
