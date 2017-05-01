@@ -4,13 +4,13 @@ buildscript {
   }
   dependencies {
     classpath 'com.android.tools.build:gradle:2.2.3'
-    classpath 'com.novoda:bintray-release:0.4.0'
   }
 }
 
 allprojects {
   repositories {
     jcenter()
+    mavenLocal()
   }
 }
 
@@ -22,20 +22,15 @@ ext {
   androidSdkVersion = 25
   buildToolsVersion = '25.0.2'
   minSdkVersion = 14
-  versionCode = 6
-  versionName = '3.0.0'
 
   supportLibraryVersion = '25.3.1'
 
   testCompile = ['junit:junit:4.12',
                  'org.mockito:mockito-core:1.10.19',
                  'org.assertj:assertj-core:2.6.0']
+}
 
-  userOrg = 'jenzz'
-  groupId = 'com.jenzz.appstate'
-  uploadName = 'RxAppState'
-  publishVersion = versionName
-  desc = 'A simple Android library that monitors app state changes (background / foreground).'
-  website = 'https://github.com/jenzz/RxAppState'
-  licences = ['MIT']
+subprojects {
+  group = GROUP
+  version = VERSION_NAME
 }

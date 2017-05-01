@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.novoda.bintray-release'
+
+archivesBaseName = POM_ARTIFACT_ID
 
 android {
     compileSdkVersion rootProject.androidSdkVersion
@@ -8,8 +9,6 @@ android {
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.androidSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
     }
 }
 
@@ -23,13 +22,4 @@ dependencies {
     testCompile project(path: ':appstate', configuration: 'testArtifact')
 }
 
-publish {
-    artifactId = 'adapter-rxjava'
-    userOrg = rootProject.userOrg
-    groupId = rootProject.groupId
-    uploadName = rootProject.uploadName
-    publishVersion = rootProject.publishVersion
-    desc = rootProject.desc
-    website = rootProject.website
-    licences = rootProject.licences
-}
+apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

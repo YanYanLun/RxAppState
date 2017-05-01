@@ -8,8 +8,6 @@ android {
     applicationId 'com.jenzz.appstate.sample'
     minSdkVersion rootProject.minSdkVersion
     targetSdkVersion rootProject.androidSdkVersion
-    versionCode rootProject.versionCode
-    versionName rootProject.versionName
   }
 
   packagingOptions {
