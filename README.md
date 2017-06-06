@@ -53,7 +53,7 @@ Grab it via Gradle:
 
 ```groovy
 dependencies {
-  compile 'com.jenzz.appstate:appstate:3.0.0'
+  compile 'com.jenzz.appstate:appstate:3.0.1'
 }
 ```
 

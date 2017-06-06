@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+Version 3.0.1 *(2017/06/06)*
+----------------------------
+* Update RxJava to v1.3.0
+* Update RxJava2 to v2.1.0
+* Update internal dependencies
+* Avoid crash when calling AppStateMonitor.stop() multiple times ([#15](https://github.com/jenzz/RxAppState/issues/15))
+
 Version 3.0.0 *(2017/04/11)*
 ----------------------------
 * Remove hard dependency on RxJava by abstracting out RxJava adapter ([#4](https://github.com/jenzz/RxAppState/issues/4))

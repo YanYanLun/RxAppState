@@ -26,9 +26,13 @@ dependencies {
   debugCompile project(':appstate-adapters:rxjava')
   debugCompile project(':appstate-adapters:rxjava2')
 
-  jcenterCompile "com.jenzz.appstate:appstate:$VERSION_NAME"
-  jcenterCompile "com.jenzz.appstate:adapter-rxjava:$VERSION_NAME"
-  jcenterCompile "com.jenzz.appstate:adapter-rxjava2:$VERSION_NAME"
+  releaseCompile project(':appstate')
+  releaseCompile project(':appstate-adapters:rxjava')
+  releaseCompile project(':appstate-adapters:rxjava2')
+
+  jcenterCompile "com.jenzz.appstate:appstate:$version"
+  jcenterCompile "com.jenzz.appstate:adapter-rxjava:$version"
+  jcenterCompile "com.jenzz.appstate:adapter-rxjava2:$version"
 
   compile "com.android.support:appcompat-v7:$supportLibraryVersion"
 }

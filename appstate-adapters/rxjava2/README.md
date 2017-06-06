@@ -30,6 +30,6 @@ Grab it via Gradle:
 
 ```groovy
 dependencies {
-  compile 'com.jenzz.appstate:adapter-rxjava2:3.0.0'
+  compile 'com.jenzz.appstate:adapter-rxjava2:3.0.1'
 }
 ```
