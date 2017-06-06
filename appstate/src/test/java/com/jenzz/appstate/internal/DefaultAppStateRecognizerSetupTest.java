@@ -12,6 +12,7 @@ import org.mockito.Mock;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.MockitoAnnotations.initMocks;
 
 public class DefaultAppStateRecognizerSetupTest {
@@ -38,10 +39,18 @@ public class DefaultAppStateRecognizerSetupTest {
 
   @Test
   public void unregistersCallbacks() {
+    recognizer.start();
     recognizer.stop();
 
     verify(mockApplication).unregisterActivityLifecycleCallbacks(any(ActivityLifecycleCallbacks.class));
     verify(mockApplication).unregisterComponentCallbacks(any(ComponentCallbacks2.class));
     verify(mockApplication).unregisterReceiver(any(BroadcastReceiver.class));
+  }
+
+  @Test
+  public void doesNothingIfAlreadyStopped() {
+    recognizer.stop();
+
+    verifyZeroInteractions(mockApplication);
   }
 }

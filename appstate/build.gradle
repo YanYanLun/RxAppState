@@ -10,6 +10,8 @@ android {
     minSdkVersion rootProject.minSdkVersion
     targetSdkVersion rootProject.androidSdkVersion
   }
+
+  testOptions.unitTests.returnDefaultValues = true
 }
 
 dependencies {

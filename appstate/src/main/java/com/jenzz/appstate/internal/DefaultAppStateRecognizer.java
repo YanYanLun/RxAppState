@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.annotation.RestrictTo;
 
+import android.util.Log;
 import com.jenzz.appstate.AppState;
 import com.jenzz.appstate.AppStateListener;
 
@@ -24,6 +25,8 @@ import static com.jenzz.appstate.AppState.FOREGROUND;
 @RestrictTo(LIBRARY)
 public final class DefaultAppStateRecognizer implements AppStateRecognizer {
 
+  private static final String TAG = "AppStateMonitor";
+
   @NonNull private final CompositeAppStateListener compositeListener = new CompositeAppStateListener();
   @NonNull private final ActivityLifecycleCallbacks activityStartedCallback = new ActivityStartedCallback();
   @NonNull private final ComponentCallbacks2 uiHiddenCallback = new UiHiddenCallback();
@@ -33,6 +36,7 @@ public final class DefaultAppStateRecognizer implements AppStateRecognizer {
   @NonNull private final Application app;
 
   @NonNull private AppState appState = BACKGROUND;
+  private boolean isRunning;
 
   public DefaultAppStateRecognizer(@NonNull Application app) {
     this.app = app;
@@ -50,6 +54,8 @@ public final class DefaultAppStateRecognizer implements AppStateRecognizer {
 
   @Override
   public void start() {
+    isRunning = true;
+
     app.registerActivityLifecycleCallbacks(activityStartedCallback);
     app.registerComponentCallbacks(uiHiddenCallback);
     app.registerReceiver(screenOffBroadcastReceiver, new IntentFilter(ACTION_SCREEN_OFF));
@@ -57,9 +63,16 @@ public final class DefaultAppStateRecognizer implements AppStateRecognizer {
 
   @Override
   public void stop() {
+    if (!isRunning) {
+      Log.w(TAG, "Attempted to stop already stopped AppStateMonitor. Ignoring this call.");
+      return;
+    }
+
     app.unregisterActivityLifecycleCallbacks(activityStartedCallback);
     app.unregisterComponentCallbacks(uiHiddenCallback);
     app.unregisterReceiver(screenOffBroadcastReceiver);
+
+    isRunning = false;
   }
 
   @NonNull
