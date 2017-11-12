@@ -11,19 +11,20 @@ allprojects {
   repositories {
     jcenter()
     mavenLocal()
+    maven { url 'https://maven.google.com' }
   }
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '3.3'
+  gradleVersion = '3.5'
 }
 
 ext {
-  androidSdkVersion = 25
-  buildToolsVersion = '25.0.3'
+  androidSdkVersion = 26
+  buildToolsVersion = '26.0.2'
   minSdkVersion = 14
 
-  supportLibraryVersion = '25.3.1'
+  supportLibraryVersion = '27.0.1'
 
   testCompile = ['junit:junit:4.12',
                  'org.mockito:mockito-core:1.10.19',
