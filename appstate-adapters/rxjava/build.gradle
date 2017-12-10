@@ -16,7 +16,7 @@ dependencies {
     provided project(':appstate')
 
     compile "com.android.support:support-annotations:$supportLibraryVersion"
-    compile 'io.reactivex:rxjava:1.3.3'
+    compile 'io.reactivex:rxjava:1.3.4'
 
     testCompile rootProject.testCompile
     testCompile project(path: ':appstate', configuration: 'testArtifact')

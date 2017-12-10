@@ -16,7 +16,7 @@ allprojects {
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '3.5'
+  gradleVersion = '3.5.1'
 }
 
 ext {
@@ -24,7 +24,7 @@ ext {
   buildToolsVersion = '26.0.2'
   minSdkVersion = 14
 
-  supportLibraryVersion = '27.0.1'
+  supportLibraryVersion = '27.0.2'
 
   testCompile = ['junit:junit:4.12',
                  'org.mockito:mockito-core:1.10.19',
