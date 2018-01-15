@@ -9,6 +9,7 @@ import android.content.IntentFilter;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
@@ -32,9 +33,7 @@ public class DefaultAppStateRecognizerSetupTest {
   public void registersCallbacks() {
     recognizer.start();
 
-    verify(mockApplication).registerActivityLifecycleCallbacks(any(ActivityLifecycleCallbacks.class));
-    verify(mockApplication).registerComponentCallbacks(any(ComponentCallbacks2.class));
-    verify(mockApplication).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+    verifyStarted();
   }
 
   @Test
@@ -42,15 +41,33 @@ public class DefaultAppStateRecognizerSetupTest {
     recognizer.start();
     recognizer.stop();
 
-    verify(mockApplication).unregisterActivityLifecycleCallbacks(any(ActivityLifecycleCallbacks.class));
-    verify(mockApplication).unregisterComponentCallbacks(any(ComponentCallbacks2.class));
-    verify(mockApplication).unregisterReceiver(any(BroadcastReceiver.class));
+    verifyStopped();
   }
 
   @Test
-  public void doesNothingIfAlreadyStopped() {
-    recognizer.stop();
+  public void ignoresMultipleCallsToStart() {
+    recognizer.start();
+    recognizer.start(); // should be ignored as it's already started
+
+    verifyStarted();
+  }
+
+  @Test
+  public void ignoresMultipleCallsToStop() {
+    recognizer.stop(); // should be ignored as it hasn't been started yet
 
     verifyZeroInteractions(mockApplication);
+  }
+
+  private void verifyStarted() {
+    verify(mockApplication).registerActivityLifecycleCallbacks(any(ActivityLifecycleCallbacks.class));
+    verify(mockApplication).registerComponentCallbacks(any(ComponentCallbacks2.class));
+    verify(mockApplication).registerReceiver(any(BroadcastReceiver.class), any(IntentFilter.class));
+  }
+
+  private void verifyStopped() {
+    verify(mockApplication).unregisterActivityLifecycleCallbacks(any(ActivityLifecycleCallbacks.class));
+    verify(mockApplication).unregisterComponentCallbacks(any(ComponentCallbacks2.class));
+    verify(mockApplication).unregisterReceiver(any(BroadcastReceiver.class));
   }
 }

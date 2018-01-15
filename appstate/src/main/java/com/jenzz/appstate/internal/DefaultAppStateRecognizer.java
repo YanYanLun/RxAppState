@@ -54,11 +54,16 @@ public final class DefaultAppStateRecognizer implements AppStateRecognizer {
 
   @Override
   public void start() {
-    isRunning = true;
+    if (isRunning) {
+      Log.w(TAG, "Attempted to start already started AppStateMonitor. Ignoring this call.");
+      return;
+    }
 
     app.registerActivityLifecycleCallbacks(activityStartedCallback);
     app.registerComponentCallbacks(uiHiddenCallback);
     app.registerReceiver(screenOffBroadcastReceiver, new IntentFilter(ACTION_SCREEN_OFF));
+
+    isRunning = true;
   }
 
   @Override
