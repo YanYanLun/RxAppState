@@ -1,3 +1,33 @@
+DEPRECATED
+==========
+RxAppState is deprecated. No more development will be taking place.
+
+Use Google's [ProcessLifecycleOwner](https://developer.android.com/reference/android/arch/lifecycle/ProcessLifecycleOwner) instead
+which is part of [Android Architecture Components](https://developer.android.com/topic/libraries/architecture).
+
+An implementation can be as simple as:
+```java
+public class AppLifecycleListener implements LifecycleObserver {
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_START)
+    public void onAppDidEnterForeground() {
+        // ...
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    public void onAppDidEnterBackground() {
+       // ...
+    }
+}
+```
+Register the observer like this:
+```java
+ProcessLifecycleOwner.get().getLifecycle().addObserver(new AppLifecycleListener());
+```
+
+Here is a great blog post that explains it in more detail:
+[Detecting when an Android app backgrounds in 2018](https://proandroiddev.com/detecting-when-an-android-app-backgrounds-in-2018-4b5a94977d5c)
+
 RxAppState [![Build Status](https://travis-ci.org/jenzz/RxAppState.svg?branch=master)](https://travis-ci.org/jenzz/RxAppState)
 ==========
 A simple, reactive Android library based on [RxJava](https://github.com/ReactiveX/RxJava) that monitors app state changes.  
